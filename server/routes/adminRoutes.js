@@ -31,12 +31,39 @@ router.post("/login" , async (req , res) => {
 router.get("/me" ,jwtAuth, async (req,res) => {
     const admin = await Admin.findOne({username : req.user.username})
     if (admin){
-        console.log(admin.username)
         res.json({"username" : admin.username})
     }else {
         res.status(403).json({"message" : "Admin does not exsists"})
     }
 })
 
+router.post("/course" ,jwtAuth, async(req,res) => {
+    const course = new Course(req.body)
+    await course.save()
+    res.json({"message" : "course created successfully" , "course_id" : course._id})
+})
+
+router.put("/course/:courseId" ,jwtAuth, async(req,res) => {
+    let course = await Course.findByIdAndUpdate(req.params.courseId , req.body , {new : true}) // new : true returns new document
+    if (course){
+        res.json({"message" : "course updated successfully"})
+    } else {
+        res.json({"message" : "course with such id not found"})
+    }
+})
+
+router.get("/courses" , jwtAuth, async(req,res) => {
+    let courses = await Course.find({})
+    res.json({courses})
+})
+
+router.get("/course/:courseId" , jwtAuth , async(req,res) => {
+    let course = await Course.findById(req.params.courseId)
+    if(course){
+        res.json({course})
+    } else {
+        res.json({"message" : "Course not found"})
+    }
+})
 
 module.exports = router
