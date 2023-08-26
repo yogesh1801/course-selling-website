@@ -3,8 +3,10 @@ import { Button, Typography } from "@mui/material"
 import axios from "axios"
 import { useEffect, useState } from "react"
 import Avatar from '@mui/material/Avatar';
+import { useNavigate } from "react-router-dom";
 function Appbar (){
     const[userEmail,setUserEmail] = useState(null)
+    const navigate = useNavigate()
     console.log(userEmail)
     async function init (){
         const response = await axios.get("http://localhost:3000/admin/me" , {
@@ -70,9 +72,9 @@ function Appbar (){
                     <div style={{
                         paddingRight : 5
                     }}>
-                    <Button variant="contained">Signup</Button>
+                    <Button variant="contained" onClick={() => navigate("/signup")}>Signup</Button>
                     </div>
-                    <Button variant="contained">SignIn</Button>
+                    <Button variant="contained" onClick={() => navigate("/signin")}>SignIn</Button>
                 </div>
             </div>
         </div>

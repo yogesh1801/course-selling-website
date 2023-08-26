@@ -3,6 +3,7 @@ import Signup from './Components/Signup'
 import Signin from './Components/Signin'
 import Appbar from './Components/Appbar'
 import { BrowserRouter as Router, Routes,Route} from 'react-router-dom'
+import Landing from './Components/Landing'
 function App() {
 
   return <div style = {{
@@ -13,6 +14,7 @@ function App() {
     <Router>
       <Appbar />
       <Routes>
+        <Route path = "/" element = {<Landing />} />
         <Route path='/signup' element={<Signup />} />
         <Route path ="/signin" element = {<Signin />} />
         <Route path ="/signup" element = {<Signup />} />
