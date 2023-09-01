@@ -7,14 +7,12 @@ import { useNavigate } from "react-router-dom";
 function Appbar (){
     const[userEmail,setUserEmail] = useState(null)
     const navigate = useNavigate()
-    console.log(userEmail)
     async function init (){
         const response = await axios.get("http://localhost:3000/admin/me" , {
             headers : {
                 "authorisation" : "Bearer " + localStorage.getItem("token")
             }
         } )
-        console.log(response)
         if (response.data.username){
             setUserEmail(response.data.username)
         }
@@ -46,7 +44,10 @@ function Appbar (){
                     }}>
                     <Avatar>{userEmail.split("")[0]}</Avatar>
                     </div>
-                    <Button variant="contained">Logout</Button>
+                    <Button variant="contained" onClick={() => {
+                        localStorage.setItem("token" , null)
+                        window.location.assign("/")
+                    }}>Logout</Button>
                 </div>
             </div>
         </div>

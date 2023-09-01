@@ -45,7 +45,7 @@ function Signin () {
                     })
                     if ((await response).data.token){
                         localStorage.setItem("token" , (await response).data.token)
-                        window.location = "/"
+                        window.location = "/courses"
                     }
                     else {
                         navigate("/signin")

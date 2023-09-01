@@ -42,7 +42,6 @@ function Signup () {
                         username,password
                     })
                     if (response){
-                        console.log(response.data)
                         navigate("/signin")
                     }
                     else {
